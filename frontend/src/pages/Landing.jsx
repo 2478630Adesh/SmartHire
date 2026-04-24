@@ -144,13 +144,20 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="card hover:shadow-lg transition"
               >
-                <div className="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-4">
-                  <f.icon className="text-brand-600" size={22} />
-                </div>
-                <h3 className="font-display text-2xl mb-2">{f.title}</h3>
-                <p className="text-ink-600 text-sm leading-relaxed">{f.desc}</p>
+                <Link
+                  to="/login"
+                  className="card hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block h-full border-2 border-transparent hover:border-brand-500"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center mb-4 shadow-sm">
+                    <f.icon className="text-brand-700" size={26} />
+                  </div>
+                  <h3 className="font-display text-2xl mb-2" style={{ fontWeight: 700 }}>{f.title}</h3>
+                  <p className="text-ink-600 text-sm leading-relaxed">{f.desc}</p>
+                  <div className="mt-4 text-xs text-brand-700 flex items-center gap-1" style={{ fontWeight: 700 }}>
+                    Get started <ArrowRight size={12} />
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -179,12 +186,14 @@ export default function Landing() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative"
               >
-                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-ink-900 text-white flex items-center justify-center text-sm font-bold">{i + 1}</div>
-                <div className="bg-gradient-to-br from-brand-100 to-purple-100 rounded-2xl p-6 h-48 flex items-center justify-center mb-4">
-                  <s.icon size={56} className="text-brand-700" />
-                </div>
-                <h3 className="font-display text-2xl mb-1">{s.title}</h3>
-                <p className="text-sm text-ink-600">{s.desc}</p>
+                <Link to="/login" className="block group cursor-pointer">
+                  <div className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-ink-900 text-white flex items-center justify-center shadow-lg z-10" style={{ fontWeight: 700 }}>{i + 1}</div>
+                  <div className="bg-gradient-to-br from-brand-100 to-brand-200 rounded-2xl p-6 h-48 flex items-center justify-center mb-4 shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all">
+                    <s.icon size={56} className="text-brand-700 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <h3 className="font-display text-2xl mb-1" style={{ fontWeight: 700 }}>{s.title}</h3>
+                  <p className="text-sm text-ink-600">{s.desc}</p>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -231,18 +240,19 @@ export default function Landing() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-ink-900 text-white relative overflow-hidden">
-        <div className="blob bg-brand-500" style={{ width: 500, height: 500, top: -200, left: -100, opacity: 0.3 }}></div>
+      <section className="py-24 px-6 bg-gradient-to-br from-ink-900 via-brand-900 to-ink-900 text-white relative overflow-hidden">
+        <div className="blob bg-brand-500" style={{ width: 500, height: 500, top: -200, left: -100, opacity: 0.4 }}></div>
+        <div className="blob bg-accent-500" style={{ width: 400, height: 400, bottom: -150, right: -50, opacity: 0.25 }}></div>
         <div className="max-w-3xl mx-auto text-center relative">
-          <h2 className="font-display text-5xl md:text-6xl mb-5">Get noticed, get hired faster</h2>
-          <p className="text-ink-400 mb-8 text-lg">It's easier with SmartHireX. Build a professional, job-winning resume in minutes!</p>
-          <Link to="/register" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink-900 font-semibold hover:bg-brand-500 hover:text-white transition">
+          <h2 className="font-display text-5xl md:text-6xl mb-5 text-white" style={{ fontWeight: 700 }}>Get noticed, get hired faster</h2>
+          <p className="text-white mb-8 text-lg opacity-95">It's easier with SmartHireX. Build a professional, job-winning resume in minutes!</p>
+          <Link to="/register" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink-900 hover:bg-brand-500 hover:text-white hover:shadow-2xl hover:-translate-y-0.5 transition-all" style={{ fontWeight: 700 }}>
             Land My Dream Job <ArrowRight size={18} />
           </Link>
-          <div className="flex items-center justify-center gap-6 mt-8 text-sm text-ink-400">
-            <div className="flex items-center gap-2"><CheckCircle2 size={14} /> 100% Free to start</div>
-            <div className="flex items-center gap-2"><CheckCircle2 size={14} /> ATS-optimized</div>
-            <div className="flex items-center gap-2"><CheckCircle2 size={14} /> 10+ templates</div>
+          <div className="flex items-center justify-center gap-6 mt-8 text-sm text-white flex-wrap" style={{ fontWeight: 500 }}>
+            <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-300" /> 100% Free to start</div>
+            <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-300" /> ATS-optimized</div>
+            <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-300" /> 10+ templates</div>
           </div>
         </div>
       </section>

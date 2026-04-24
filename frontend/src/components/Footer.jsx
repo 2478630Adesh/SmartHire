@@ -53,7 +53,7 @@ export default function Footer() {
 
         <div className="border-t border-ink-800 mt-12 pt-6 text-sm text-ink-400 flex flex-col md:flex-row justify-between gap-3">
           <p>© 2026 SmartHireX. Final Year Project.</p>
-          <p>Built with ❤️ using the MERN stack.</p>
+          <p>Built by Group A-11</p>
         </div>
       </div>
     </footer>

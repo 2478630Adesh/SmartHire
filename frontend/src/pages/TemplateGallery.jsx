@@ -41,15 +41,15 @@ export default function TemplateGallery() {
   };
 
   return (
-    <div className="min-h-screen bg-ink-50">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="min-h-screen mesh-gradient">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <p className="text-sm uppercase tracking-widest text-brand-600 font-semibold mb-3">Choose your template</p>
-          <h1 className="font-display text-5xl md:text-6xl text-ink-900 mb-4">Pick a resume that <em className="italic">wins jobs</em></h1>
+          <p className="text-sm uppercase tracking-widest text-brand-700 mb-3" style={{ fontWeight: 700 }}>Choose your template</p>
+          <h1 className="font-display text-5xl md:text-6xl text-ink-900 mb-4" style={{ fontWeight: 700 }}>Pick a resume that <em className="italic text-brand-600">wins jobs</em></h1>
           <p className="text-ink-600 max-w-2xl mx-auto">All templates are ATS-friendly and fully customizable. Pick one and make it yours in minutes.</p>
         </motion.div>
 
