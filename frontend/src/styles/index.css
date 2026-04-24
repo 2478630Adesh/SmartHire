@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #4F46E5;
+  --brand-dark: #3730A3;
+  --ink: #0F172A;
+  --accent: #F59E0B;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: #0F172A;
+  background: #FAFAF9;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* Selection */
+::selection {
+  background: #4F46E5;
+  color: white;
+}
+
+/* Utility classes */
+.font-display { font-family: "Instrument Serif", serif; letter-spacing: -0.02em; }
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-ink-900 text-white font-medium text-sm transition-all hover:bg-brand-600 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-ink-200 text-ink-900 font-medium text-sm transition-all hover:border-ink-900 hover:-translate-y-0.5;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-ink-200 bg-white text-ink-800 font-medium text-sm transition-all hover:border-brand-500 hover:text-brand-600;
+}
+
+.card {
+  @apply bg-white rounded-2xl border border-ink-100 p-6 shadow-sm;
+}
+
+.input {
+  @apply w-full px-4 py-2.5 rounded-xl border border-ink-200 bg-white text-ink-800 text-sm focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition;
+}
+
+.label {
+  @apply block text-xs font-semibold uppercase tracking-wider text-ink-600 mb-1.5;
+}
+
+/* Animated gradient background */
+.hero-gradient {
+  background: linear-gradient(120deg, #EEF2FF 0%, #FAF5FF 25%, #FEF3C7 50%, #FEE2E2 75%, #EEF2FF 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Blob shapes */
+.blob {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Resume preview print styles */
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  .resume-preview { margin: 0; padding: 0; box-shadow: none; }
+}
+
+/* Score ring animation */
+.score-ring {
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+/* Template preview cards */
+.template-card {
+  transition: all 0.3s ease;
+}
+.template-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Marquee (for trusted by strip) */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 30s linear infinite;
+}
