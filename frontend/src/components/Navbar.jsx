@@ -58,20 +58,20 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b-2 border-ink-100"
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-24 flex items-center justify-between">
         {/* LEFT: Logo */}
         <Link to={user ? (user.role === 'hr' ? '/hr/dashboard' : '/dashboard') : '/'} className="flex items-center gap-3 group">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white text-2xl shadow-lg shadow-brand-500/25 transition-transform group-hover:-rotate-6"
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white text-3xl shadow-lg shadow-brand-500/25 transition-transform group-hover:-rotate-6"
                style={{ fontWeight: 700 }}>
             S
           </div>
           <div>
-            <div className="font-display text-2xl leading-none" style={{ fontWeight: 700 }}>SmartHireX</div>
+            <div className="font-display text-3xl leading-none" style={{ fontWeight: 700 }}>SmartHireX</div>
             {user?.role === 'hr' && (
-              <div className="text-[11px] font-bold text-brand-700 uppercase tracking-wider mt-1">HR Portal</div>
+              <div className="text-xs text-brand-700 uppercase tracking-wider mt-1.5" style={{ fontWeight: 700 }}>HR Portal</div>
             )}
             {user?.role === 'user' && (
-              <div className="text-[11px] font-bold text-ink-500 uppercase tracking-wider mt-1">Job Seeker</div>
+              <div className="text-xs text-ink-500 uppercase tracking-wider mt-1.5" style={{ fontWeight: 700 }}>Job Seeker</div>
             )}
           </div>
         </Link>
@@ -85,14 +85,14 @@ export default function Navbar() {
               <Link
                 key={item.to}
                 to={item.to}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-[15px] transition-all ${
+                className={`flex items-center gap-2 px-5 py-3 rounded-full text-base transition-all ${
                   active
                     ? 'bg-ink-900 text-white shadow-md'
                     : 'text-ink-700 hover:bg-ink-100'
                 }`}
                 style={{ fontWeight: 700 }}
               >
-                <Icon size={16} />
+                <Icon size={18} />
                 {item.label}
               </Link>
             );
