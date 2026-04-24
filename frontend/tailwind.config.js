@@ -4,28 +4,50 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Instrument Serif"', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        display: ['"Fraunces"', 'Georgia', 'serif'],
+        sans: ['"Inter"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
+        // Fresh primary: emerald / mint green — modern, professional, optimistic
         brand: {
-          50: '#F3F4FF',
-          100: '#E4E8FF',
-          500: '#4F46E5',
-          600: '#4338CA',
-          700: '#3730A3',
-          900: '#1E1B4B',
+          50:  '#ECFDF5',
+          100: '#D1FAE5',
+          200: '#A7F3D0',
+          300: '#6EE7B7',
+          400: '#34D399',
+          500: '#10B981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065F46',
+          900: '#064E3B',
         },
+        // Warm coral accent for CTAs and highlights
+        accent: {
+          50:  '#FFF7ED',
+          100: '#FFEDD5',
+          300: '#FDBA74',
+          500: '#F97316',
+          600: '#EA580C',
+          700: '#C2410C',
+        },
+        // Neutrals: softer, warmer grays (stone family — reads easy on eyes)
         ink: {
-          50: '#F8FAFC',
-          100: '#F1F5F9',
-          200: '#E2E8F0',
-          400: '#94A3B8',
-          600: '#475569',
-          800: '#1E293B',
-          900: '#0F172A',
+          50:  '#FAFAF9',
+          100: '#F5F5F4',
+          200: '#E7E5E4',
+          300: '#D6D3D1',
+          400: '#A8A29E',
+          500: '#78716C',
+          600: '#57534E',
+          700: '#44403C',
+          800: '#292524',
+          900: '#1C1917',
         },
+        mint:  { 100: '#D1FAE5', 500: '#10B981', 700: '#047857' },
+        sky:   { 100: '#DBEAFE', 500: '#3B82F6', 700: '#1D4ED8' },
+        rose:  { 100: '#FFE4E6', 500: '#F43F5E', 700: '#BE123C' },
+        amber: { 100: '#FEF3C7', 500: '#F59E0B', 700: '#B45309' },
       },
       animation: {
         'fade-up': 'fadeUp 0.6s ease-out forwards',
@@ -33,17 +55,13 @@ export default {
         'slide-right': 'slideRight 0.5s ease-out forwards',
         'float': 'float 6s ease-in-out infinite',
         'gradient': 'gradient 8s ease infinite',
-        'pulse-slow': 'pulse 3s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
           '0%': { opacity: 0, transform: 'translateY(20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
-        fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        },
+        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
         slideRight: {
           '0%': { opacity: 0, transform: 'translateX(-20px)' },
           '100%': { opacity: 1, transform: 'translateX(0)' },

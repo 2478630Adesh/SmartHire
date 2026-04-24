@@ -17,7 +17,12 @@ exports.analyzeBuiltResume = async (req, res) => {
 
     const resumeText = resumeToText(resume);
     const ats = computeATSScore(resumeText, jobDescription);
-    res.json(ats);
+    res.json({
+      ...ats,
+      extractedText: resumeText,
+      source: 'saved',
+      wordCount: resumeText.split(/\s+/).filter(Boolean).length,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -33,12 +38,23 @@ exports.analyzeUploadedResume = async (req, res) => {
       return res.status(400).json({ message: 'jobDescription is required' });
 
     const resumeText = await extractTextFromFile(req.file.path);
+    if (!resumeText || resumeText.trim().length < 20) {
+      try { fs.unlinkSync(req.file.path); } catch {}
+      return res.status(400).json({
+        message: 'Could not extract enough text from the file. If it is a scanned PDF, please upload a text-based PDF or DOCX.',
+      });
+    }
     const ats = computeATSScore(resumeText, jobDescription);
 
-    // cleanup uploaded file
     try { fs.unlinkSync(req.file.path); } catch {}
 
-    res.json({ ...ats, resumeText: resumeText.slice(0, 1500) });
+    res.json({
+      ...ats,
+      extractedText: resumeText,
+      source: 'uploaded',
+      fileName: req.file.originalname,
+      wordCount: resumeText.split(/\s+/).filter(Boolean).length,
+    });
   } catch (err) {
     if (req.file) { try { fs.unlinkSync(req.file.path); } catch {} }
     res.status(500).json({ message: err.message });
@@ -51,12 +67,18 @@ exports.checkUploadedResume = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Resume file is required' });
     const resumeText = await extractTextFromFile(req.file.path);
-    // Use a generic job description of common qualities to score against
-    const genericJD = `professional experience education skills communication teamwork leadership problem solving project management responsibilities achievements`;
+    const genericJD =
+      'professional experience education skills communication teamwork leadership problem solving project management responsibilities achievements';
     const ats = computeATSScore(resumeText, genericJD);
 
     try { fs.unlinkSync(req.file.path); } catch {}
-    res.json({ ...ats, resumeText: resumeText.slice(0, 1500) });
+    res.json({
+      ...ats,
+      extractedText: resumeText,
+      source: 'uploaded',
+      fileName: req.file.originalname,
+      wordCount: resumeText.split(/\s+/).filter(Boolean).length,
+    });
   } catch (err) {
     if (req.file) { try { fs.unlinkSync(req.file.path); } catch {} }
     res.status(500).json({ message: err.message });
