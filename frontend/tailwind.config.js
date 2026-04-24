@@ -4,12 +4,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Fraunces"', 'Georgia', 'serif'],
-        sans: ['"Inter"', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        // Calibri for people with it installed (Windows/Mac), Carlito as
+        // a metric-compatible fallback (Google Fonts, identical look).
+        sans: ['"Calibri"', '"Carlito"', 'system-ui', 'sans-serif'],
+        display: ['"Calibri"', '"Carlito"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'Consolas', 'monospace'],
       },
       colors: {
-        // Fresh primary: emerald / mint green — modern, professional, optimistic
         brand: {
           50:  '#ECFDF5',
           100: '#D1FAE5',
@@ -22,7 +23,6 @@ export default {
           800: '#065F46',
           900: '#064E3B',
         },
-        // Warm coral accent for CTAs and highlights
         accent: {
           50:  '#FFF7ED',
           100: '#FFEDD5',
@@ -31,7 +31,6 @@ export default {
           600: '#EA580C',
           700: '#C2410C',
         },
-        // Neutrals: softer, warmer grays (stone family — reads easy on eyes)
         ink: {
           50:  '#FAFAF9',
           100: '#F5F5F4',
