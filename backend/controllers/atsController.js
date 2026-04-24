@@ -1,5 +1,6 @@
 const { computeATSScore, resumeToText } = require('../utils/atsScorer');
 const { extractTextFromFile } = require('../utils/fileParser');
+const { analyzeResumeQuality } = require('../utils/resumeQuality');
 const Resume = require('../models/Resume');
 const fs = require('fs');
 
@@ -17,11 +18,13 @@ exports.analyzeBuiltResume = async (req, res) => {
 
     const resumeText = resumeToText(resume);
     const ats = computeATSScore(resumeText, jobDescription);
+    const quality = analyzeResumeQuality(resumeText);
     res.json({
       ...ats,
       extractedText: resumeText,
       source: 'saved',
       wordCount: resumeText.split(/\s+/).filter(Boolean).length,
+      quality,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -45,6 +48,7 @@ exports.analyzeUploadedResume = async (req, res) => {
       });
     }
     const ats = computeATSScore(resumeText, jobDescription);
+    const quality = analyzeResumeQuality(resumeText);
 
     try { fs.unlinkSync(req.file.path); } catch {}
 
@@ -54,6 +58,7 @@ exports.analyzeUploadedResume = async (req, res) => {
       source: 'uploaded',
       fileName: req.file.originalname,
       wordCount: resumeText.split(/\s+/).filter(Boolean).length,
+      quality,
     });
   } catch (err) {
     if (req.file) { try { fs.unlinkSync(req.file.path); } catch {} }

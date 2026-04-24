@@ -285,6 +285,88 @@ export default function ATSChecker() {
                     </ul>
                   </div>
 
+                  {/* -------- RESUME QUALITY ANALYSIS (new) -------- */}
+                  {result.quality && (
+                    <div className="card bg-gradient-to-br from-white to-accent-50/40 border-accent-100">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h3 className="font-display text-xl flex items-center gap-2" style={{ fontWeight: 700 }}>
+                            <Sparkles size={18} className="text-accent-500" />
+                            Resume Quality Grade
+                          </h3>
+                          <p className="text-xs text-ink-500 mt-0.5">Beyond keyword matching — writing quality analysis</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="font-display text-5xl" style={{
+                            fontWeight: 700,
+                            color: result.quality.overallScore >= 85 ? '#10B981' : result.quality.overallScore >= 70 ? '#F59E0B' : '#F43F5E'
+                          }}>
+                            {result.quality.overallGrade}
+                          </div>
+                          <div className="text-xs text-ink-500 mt-0.5" style={{ fontWeight: 700 }}>
+                            {result.quality.overallScore}/100
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Metrics grid */}
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                        <QualityMetric label="Action Verbs"     value={result.quality.checks.actionVerbCount}     sub={`${result.quality.checks.actionVerbRatio}% of sentences`} good={result.quality.checks.actionVerbRatio >= 40} />
+                        <QualityMetric label="Quantified"       value={result.quality.checks.quantifiedCount}     sub="metrics found" good={result.quality.checks.quantifiedCount >= 3} />
+                        <QualityMetric label="Passive Voice"    value={result.quality.checks.passiveCount}        sub="instances" good={result.quality.checks.passiveCount <= 3} invert />
+                        <QualityMetric label="Avg Bullet"       value={`${result.quality.checks.avgBulletLength}`} sub="words" good={result.quality.checks.avgBulletLength >= 12 && result.quality.checks.avgBulletLength <= 28} />
+                      </div>
+
+                      {/* Highlights */}
+                      {result.quality.highlights?.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="text-xs uppercase tracking-wider text-brand-700 mb-2" style={{ fontWeight: 700 }}>What's Working</h4>
+                          <ul className="space-y-1.5">
+                            {result.quality.highlights.map((h, i) => (
+                              <li key={i} className="text-sm flex items-start gap-2">
+                                <CheckCircle2 size={14} className="text-brand-600 mt-0.5 flex-shrink-0" />
+                                <span className="text-ink-700">{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Issues */}
+                      {result.quality.issues?.length > 0 && (
+                        <div>
+                          <h4 className="text-xs uppercase tracking-wider text-rose-700 mb-2" style={{ fontWeight: 700 }}>Issues to Fix</h4>
+                          <ul className="space-y-2">
+                            {result.quality.issues.map((iss, i) => (
+                              <li key={i} className={`p-3 rounded-lg border-l-4 ${
+                                iss.type === 'error' ? 'bg-rose-50 border-rose-400' :
+                                iss.type === 'warning' ? 'bg-amber-50 border-amber-400' :
+                                'bg-sky-50 border-sky-400'
+                              }`}>
+                                <div className="text-sm text-ink-900" style={{ fontWeight: 700 }}>{iss.title}</div>
+                                <div className="text-xs text-ink-700 mt-1">{iss.detail}</div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Action verbs used */}
+                      {result.quality.checks.foundActionVerbs?.length > 0 && (
+                        <div className="mt-4 pt-4 border-t border-accent-100">
+                          <p className="text-xs text-ink-600 mb-2" style={{ fontWeight: 700 }}>Action verbs you're using:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {result.quality.checks.foundActionVerbs.map((v, i) => (
+                              <span key={i} className="px-2 py-0.5 rounded-md text-[10px] bg-brand-100 text-brand-800" style={{ fontWeight: 700 }}>
+                                {v}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   {/* -------- RESUME HEALTH CHECK -------- */}
                   <div className="card">
                     <h3 className="font-semibold text-sm mb-3">Resume Health Check</h3>
@@ -433,4 +515,17 @@ function formatCheck(key) {
     lengthOk: 'Optimal length (200–8000 chars)',
   };
   return map[key] || key;
+}
+
+function QualityMetric({ label, value, sub, good, invert = false }) {
+  const isGood = good;
+  return (
+    <div className={`p-3 rounded-xl text-center ${isGood ? 'bg-brand-50 border border-brand-200' : 'bg-rose-50 border border-rose-200'}`}>
+      <div className={`text-2xl ${isGood ? 'text-brand-700' : 'text-rose-700'}`} style={{ fontWeight: 700 }}>
+        {value}
+      </div>
+      <div className="text-[10px] uppercase tracking-wider text-ink-700 mt-1" style={{ fontWeight: 700 }}>{label}</div>
+      <div className="text-[10px] text-ink-500">{sub}</div>
+    </div>
+  );
 }

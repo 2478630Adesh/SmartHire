@@ -15,6 +15,7 @@ import JobDetail from './pages/JobDetail';
 import HRDashboard from './pages/HRDashboard';
 import HRPostJob from './pages/HRPostJob';
 import HRApplicants from './pages/HRApplicants';
+import HRAnalytics from './pages/HRAnalytics';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -45,6 +46,7 @@ export default function App() {
 
           {/* HR only */}
           <Route path="/hr/dashboard" element={<ProtectedRoute hrOnly><HRDashboard /></ProtectedRoute>} />
+          <Route path="/hr/analytics" element={<ProtectedRoute hrOnly><HRAnalytics /></ProtectedRoute>} />
           <Route path="/hr/post-job" element={<ProtectedRoute hrOnly><HRPostJob /></ProtectedRoute>} />
           <Route path="/hr/job/:jobId/applicants" element={<ProtectedRoute hrOnly><HRApplicants /></ProtectedRoute>} />
 

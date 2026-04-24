@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import {
   Sparkles, LogOut, User, Briefcase, LayoutDashboard,
   FileText, Target, Search, PlusCircle, Menu, X, ChevronDown,
+  BarChart3,
 } from 'lucide-react';
+import NotificationBell from './NotificationBell';
 
 // Nav items configured per user role
 const NAV_ITEMS = {
@@ -21,9 +23,10 @@ const NAV_ITEMS = {
     { to: '/ats-checker', label: 'ATS Checker', icon: Target },
   ],
   hr: [
-    { to: '/hr/dashboard', label: 'Dashboard',     icon: LayoutDashboard },
-    { to: '/hr/post-job',  label: 'Post a Job',    icon: PlusCircle },
-    { to: '/jobs',         label: 'Browse Jobs',   icon: Search },
+    { to: '/hr/dashboard',  label: 'Dashboard',   icon: LayoutDashboard },
+    { to: '/hr/analytics',  label: 'Analytics',   icon: BarChart3 },
+    { to: '/hr/post-job',   label: 'Post a Job',  icon: PlusCircle },
+    { to: '/jobs',          label: 'Browse Jobs', icon: Search },
   ],
 };
 
@@ -98,6 +101,7 @@ export default function Navbar() {
 
         {/* RIGHT: User menu / auth buttons */}
         <div className="flex items-center gap-3">
+          {user && <NotificationBell />}
           {user ? (
             <div className="relative">
               <button

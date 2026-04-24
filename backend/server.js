@@ -17,6 +17,7 @@ app.use('/api/resumes', require('./routes/resumeRoutes'));
 app.use('/api/jobs', require('./routes/jobRoutes'));
 app.use('/api/applications', require('./routes/applicationRoutes'));
 app.use('/api/ats', require('./routes/atsRoutes'));
+app.use('/api/notifications', require('./routes/notificationRoutes'));
 
 app.get('/', (req, res) => {
   res.json({
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
       '/api/jobs',
       '/api/applications',
       '/api/ats',
+      '/api/notifications',
     ],
   });
 });
