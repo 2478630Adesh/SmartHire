@@ -32,14 +32,18 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/templates" element={<TemplateGallery />} />
+
+          {/* Public to guests, but once logged in, only job seekers can view them */}
+          <Route path="/templates" element={<ProtectedRoute userOnly><TemplateGallery /></ProtectedRoute>} />
+          <Route path="/ats-checker" element={<ProtectedRoute userOnly><ATSChecker /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute userOnly><Dashboard /></ProtectedRoute>} />
+          <Route path="/builder/:id" element={<ProtectedRoute userOnly><ResumeBuilder /></ProtectedRoute>} />
+
+          {/* Jobs can be browsed by anyone */}
           <Route path="/jobs" element={<JobBoard />} />
           <Route path="/jobs/:id" element={<JobDetail />} />
-          <Route path="/ats-checker" element={<ProtectedRoute><ATSChecker /></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/builder/:id" element={<ProtectedRoute><ResumeBuilder /></ProtectedRoute>} />
 
-          {/* HR */}
+          {/* HR only */}
           <Route path="/hr/dashboard" element={<ProtectedRoute hrOnly><HRDashboard /></ProtectedRoute>} />
           <Route path="/hr/post-job" element={<ProtectedRoute hrOnly><HRPostJob /></ProtectedRoute>} />
           <Route path="/hr/job/:jobId/applicants" element={<ProtectedRoute hrOnly><HRApplicants /></ProtectedRoute>} />
